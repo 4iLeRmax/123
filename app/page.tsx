@@ -1,6 +1,5 @@
 import React from "react";
 import prisma from "./lib/prisma";
-import { revalidatePath } from "next/cache";
 import { createPost } from "./lib/actions";
 
 export default async function HomePage() {
