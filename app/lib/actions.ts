@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import prisma from "./prisma";
 
 export const createPost = async (formData: FormData) => {
@@ -11,5 +11,15 @@ export const createPost = async (formData: FormData) => {
     },
   });
 
-  revalidatePath("/");
+  revalidateTag("posts");
+};
+
+export const deletePost = async (id: string, formData: FormData) => {
+  await prisma.post.delete({
+    where: {
+      id,
+    },
+  });
+
+  revalidateTag("posts");
 };
